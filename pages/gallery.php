@@ -3,7 +3,7 @@
     include('dashboard.php');
     include('../action/config.php');
 
-    $query = "SELECT LokasiFile From foto";
+    $query = "SELECT FotoID, LokasiFile From foto";
     $result = mysqli_query($connection, $query);
 ?>
 
@@ -76,7 +76,7 @@ img.zoom {
     
             echo '
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="' . $row['LokasiFile'] . '" class="fancybox" rel="ligthbox">
+                <a href="detailGambar.php?id= '. $row['FotoID'].' " class="" rel="">
                     <img src="' . $row['LokasiFile'] . '" class="zoom img-fluid" alt="">
                 </a>
             </div>
