@@ -11,7 +11,7 @@
     <a class="btn btn-primary" href="albumfoto.php">Buat Album</a>
         <div class="card mt-5">
             <div class="card-header">
-                Products
+                Input Gambar
             </div>
             <div class="card-body">
                 <div class="card-body">
