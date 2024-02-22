@@ -5,6 +5,7 @@
 
     
     $idFoto = $_GET['id'];
+    $usrName = $_SESSION['Username'];
     $query = "SELECT LokasiFile From foto WHERE FotoID = $idFoto";
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
@@ -14,9 +15,16 @@
     $querySelect = "SELECT COUNT(LikeID) AS total_like FROM likefoto WHERE FotoID = $idFoto";
     $tampilLike = mysqli_query($connection, $querySelect);
     $like = mysqli_fetch_assoc($tampilLike);
-
     // Mengambil nilai total like dari hasil query
-    $totalLike = $like['total_like']
+    $totalLike = $like['total_like'];
+
+
+    //Komentar Foto
+    $queryKomentar = "SELECT a.Username, b.IsiKomentar
+                        FROM user AS a
+                        LEFT JOIN komentarfoto AS b ON b.UserID = a.UserID
+                        WHERE b.IsiKomentar IS NOT NULL";
+    $tampilKomen = mysqli_query($connection, $queryKomentar);
     
 ?>
 
@@ -109,11 +117,16 @@ img.zoom {
       
                 <div class="row justify-content-lg-center mt-5">
                     <div class="col-12 col-lg-9">
-                        <form action="#!">
+                        <form method="POST" action="../action/actionKomentar.php">
                             <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                                 <div class="col-12">
                                     <label for="comment" class="form-label">Comment <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="comment" rows="3" required></textarea>
+                                    <textarea type="text" class="form-control" rows="3" name="isiKomentar" required></textarea>
+                                </div>
+
+                                <div class="col-4">
+                                    
+                                    <input class="form-control" type="hidden" name="idFoto" value="<?php echo $idFoto ?>" readonly/>
                                 </div>
 
                                 <div>
@@ -128,21 +141,26 @@ img.zoom {
       
 
                         
-       <div class="row justify-content-lg-center bg-light  rounded shadow-sm overflow-hidden">
-            <div class="col-12 col-lg-9">
-                <div class=" overflow-hidden mt-4">
-                    <div class="p-4">
-                        <div class="mb-3">
-                            <strong>User123:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-                        <div class="mb-3">
-                            <strong>User456:</strong> Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </div>
-                    </div>
-                </div>
-            </div>
-         </div>
-    </div>
+    <?php
+        while ($komen = mysqli_fetch_assoc($tampilKomen)) {
+            $uname = $komen['Username'];
+            $komentar = $komen['IsiKomentar'];
+
+            // Menampilkan komentar
+            echo '<div class="row justify-content-lg-center bg-light rounded shadow-sm overflow-hidden">' .
+                '<div class="col-12 col-lg-9">' .
+                '<div class="overflow-hidden">' .
+                '<div class="p-4">' .
+                '<div class="mb-1">' .
+                '<strong>' . $uname . ':</strong> ' . $komentar .
+                '</div>' .
+                '</div>' .
+                '</div>' .
+                '</div>' .
+                '</div>';
+        }
+    ?>
+
 
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

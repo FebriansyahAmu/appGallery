@@ -20,6 +20,7 @@
             $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['NamaLengkap'] = $row['NamaLengkap'];
+            $_SESSION['Username'] = $row['Username'];
             
             echo '<script>window.location.href ="../pages/dashboard.php"</script>';
         }else{

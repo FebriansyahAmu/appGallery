@@ -8,7 +8,7 @@
 ?>
 
 <div id="main-content">
-    <a class="btn btn-primary" href="albumfoto.php">Buat Album</a>
+
         <div class="card mt-5">
             <div class="card-header">
                 Input Gambar
@@ -50,7 +50,7 @@
                     </div>
  
                     <div class="col d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-primary">Tambahkan Product</button>
+                        <button type="submit" class="btn btn-primary">Tambahkan Foto</button>
                     </div>
 
                 </form>
@@ -58,5 +58,62 @@
         </div>
             </div>
         </div>
+
+
+        <h2>Koleksi Foto</h2>
+        <?php
+        include("../action/config.php");
+        $sessionUserID = $_SESSION['UserID'];
+        $query = "SELECT 
+                Album.AlbumID,
+                Album.NamaAlbum,
+                Album.Deskripsi,
+                Album.TanggalDibuat,
+                COUNT(Foto.FotoID) AS JumlahFoto
+            FROM 
+                Album
+            LEFT JOIN 
+                Foto ON Album.AlbumID = Foto.AlbumID
+            WHERE
+                Album.UserID = ?
+            GROUP BY 
+                Album.AlbumID, Album.NamaAlbum, Album.Deskripsi, Album.TanggalDibuat;
+            ";
+        $stmt = mysqli_prepare($connection, $query);
+
+        mysqli_stmt_bind_param($stmt, "i", $sessionUserID);
+
+        // Eksekusi pernyataan SQL
+        mysqli_stmt_execute($stmt);
+
+        // Dapatkan hasil dari pernyataan SQL
+        $result = mysqli_stmt_get_result($stmt);
+
+        echo "
+            <table class='table'>
+            <tr>
+                <th>Album ID</th>    
+                <th>Nama Album</th>
+                <th>Deskripsi</th>
+                <th>Tanggal Dibuat</th>
+                <th>Jumlah Foto</th>
+                <th>Action</th>
+            </tr>
+        ";
+    
+    while($row = mysqli_fetch_assoc($result)){
+
+        echo "<tr>";
+        echo "<td>". $row['AlbumID'] . "</td>";
+        echo "<td>". $row['NamaAlbum'] . "</td>";
+        echo "<td>". $row['Deskripsi'] . "</td>";
+        echo "<td>". $row['TanggalDibuat'] . "</td>";
+        echo "<td>". $row['JumlahFoto'] . "</td>";
+        echo "<td><a href='koleksiFoto.php?id=". $row['AlbumID'] ."' class='btn btn-success'>Lihat Koleksi</a></td>";
+        echo "</tr>";
+    }
+    
+    echo "</table>";
+    ?>
 
 </div>
