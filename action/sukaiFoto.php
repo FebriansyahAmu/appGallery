@@ -21,7 +21,8 @@ if(isset($_GET['idFoto'])){
             echo "Terjadi kesalahan saat menambahkan like: " . $connection->error;
         }
     } else {
-        echo "Anda sudah memberikan like untuk foto ini.";
+        echo "<script>alert('Anda sudah memberikan like untuk foto ini.')</script>";
+        
     }
 } else {
     echo "ID foto tidak ditemukan";

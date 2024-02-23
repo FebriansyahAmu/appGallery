@@ -8,7 +8,7 @@
         $Password = $_POST['password'];
 
 
-        $query = "SELECT UserID, Email, Password, NamaLengkap FROM user WHERE Email = ? AND Password = ?";
+        $query = "SELECT UserID, Username, Email, Password, NamaLengkap FROM user WHERE Email = ? AND Password = ?";
         $stmt = $connection->prepare($query);
         $stmt->bind_param("ss", $Email, $Password);
         $stmt->execute();

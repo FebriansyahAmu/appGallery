@@ -81,7 +81,7 @@
     >
       <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#" style="color: white"
-          >Start Bootstrap</a
+          >Web Gallery</a
         >
         <button
           class="navbar-toggler navbar-toggler-right"

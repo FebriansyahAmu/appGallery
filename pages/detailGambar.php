@@ -23,7 +23,8 @@
     $queryKomentar = "SELECT a.Username, b.IsiKomentar
                         FROM user AS a
                         LEFT JOIN komentarfoto AS b ON b.UserID = a.UserID
-                        WHERE b.IsiKomentar IS NOT NULL";
+                        WHERE b.IsiKomentar IS NOT NULL
+                        ORDER BY b.KomentarID DESC";
     $tampilKomen = mysqli_query($connection, $queryKomentar);
     
 ?>

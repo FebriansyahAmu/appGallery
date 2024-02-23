@@ -43,6 +43,10 @@
         margin-left: 280px;
         padding: 15px;
     }
+
+    .btn{
+        border-radius: 2.5px;
+    }
 </style>
 <body>
     <div id="sidebar">

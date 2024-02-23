@@ -69,7 +69,10 @@
         echo "<td>". $row['Deskripsi'] . "</td>";
         echo "<td>". $row['TanggalDibuat'] . "</td>";
         echo "<td>". $row['UserID'] . "</td>";
-        echo "<td><a href='../action/hapusAlbum.php?id=". $row['AlbumID'] ."' class='btn btn-danger'>Hapus</a></td>";
+        echo "<td>
+                <a href='../action/hapusAlbum.php?id=". $row['AlbumID'] ."' class='btn btn-danger'>Hapus</a>
+                <a href='editAlbumFoto.php?id=". $row['AlbumID'] ."' class='btn btn-warning'>Edit Album</a>
+                </td>";
         echo "</tr>";
     }
     
