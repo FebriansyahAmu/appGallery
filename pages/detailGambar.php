@@ -10,14 +10,12 @@
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
 
-
     //like foto
     $querySelect = "SELECT COUNT(LikeID) AS total_like FROM likefoto WHERE FotoID = $idFoto";
     $tampilLike = mysqli_query($connection, $querySelect);
     $like = mysqli_fetch_assoc($tampilLike);
     // Mengambil nilai total like dari hasil query
     $totalLike = $like['total_like'];
-
 
     //Komentar Foto
     $queryKomentar = "SELECT a.Username, b.IsiKomentar
@@ -29,10 +27,6 @@
     $tampilKomen = mysqli_query($connection, $queryKomentar);
     
 ?>
-while(){
-<p>echo row["Username"] <p> : <p>echo ["Isi Komentar"]</p>
-}
-
 
 
 <style>
