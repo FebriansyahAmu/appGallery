@@ -96,6 +96,7 @@ img.zoom {
                 <div class="row">
                     <?php
                         echo '
+
                         <div class="col-lg-12 col-md-12 col-xs-12 thumb full-height d-flex justify-content-center ">
                             <a href="" class="" rel="">
                                 <img src="' . $row['LokasiFile'] . '" class=" img-fluid" alt="">
